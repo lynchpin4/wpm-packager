@@ -75,8 +75,7 @@ module.exports = function(grunt) {
                 
                 files: {
                     js: ['sdk.js'],
-                    css: ['sdk.css'],
-                    files: ['frame.html']
+                    css: ['sdk.css']
                 }
             },
             

@@ -14,3 +14,15 @@ app.use('/build', express.static(__dirname + '/../build'));
 
 app.listen(3000);
 console.log("navigate to localhost:3000 to test");
+
+var app2 = express();
+
+app2.get('/', function(req, res){
+  res.status(200);
+  res.set('Content-Type', 'text/html');
+  var html = fs.readFileSync(__dirname + '/../iframe_sandbox.html')+'';
+  res.send(html);
+});
+
+app2.listen(3001);
+console.log("sandbox iframe server listening on port 3001");

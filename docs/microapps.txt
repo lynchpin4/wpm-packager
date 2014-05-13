@@ -1,0 +1,73 @@
+Packaged Apps for Webpages
+=============================
+
+Since the mid 2000's every major browser has implemented a way to build extension functionality into the browser. What we are
+building is a flexible solution to provide extensions for webpages, integrated either by the owner of the site or sideloaded via
+a browser extension.
+
+Our concept is an open market for extensions to existing webpages, thru packaging the assets of a 'microapp' into a single JSON file
+that can be loaded onto any html5 page or app. The app developer will specify a context in which the app will load, allowing for
+extensions that run inside of frames ('safe' extensions) that have access to a subset of the host webpage's api as defined by
+a crossframe JS api, or injected directly into the host frame context giving the microapp full access to the context of the page.
+
+Eventually our goals include modifying the V8 engine used in Chrome and node-webkit to allow hooking of JS functions and thru proxy objects,
+modify hidden scopes or obsfucated code inside of the page.
+
+In this document, I will define the specification (v1) used for the microapps json generated currently by grunt-packager. Although the simplicity
+of the specification will allow the developer to decide how they want to generate the files.
+
+The JSON spec takes advantage of the native base64 encoding utilities in modern web browsers, the choosen packager will convert a package.json file specifying the context, resources and metadata of the app and turn out a package ready to be loaded into a web context.
+
+The 'context' in this case, is the frame in which the app will be injected. Apps that build on to the core functionality of the side will want to run in the 'page' context. This provides full access to the DOM in Chrome-like browsers by default, although sandboxed from the core JS code. We intend to work around this providing custom releases of the Chromium browser with this security function disabled.
+
+Sandboxed apps will allow the page owner to define when and where the app gets injected, preloading and injecting apps selected by the site owner to extend functionality of their app or website. Because the script market can be loaded with the simple insertion of a javascript tag, any site can bring rich functionality provided by microapps to their site.
+
+By containing all of an apps working code in a single json file (although there is no mechanism currently designed to prevent loading from crossdomain resources), it is possible to audit and evaluate the security risk posed by each individual app. However secure the main package repositories may be, it will ultimately be the responsibility of the user to determine the trust level assigned to the apps they choose to install.
+
+Things that still need to be written
+=============================
+
+Dependency management.
+
+Technical Specification (JSON)
+=============================
+
+The current package format is very simple:
+
+{
+    "name": "testpkg",
+	"context": "page|sandbox|widget",
+    "js": [{
+        "src": "KGZ1bmN0aW9uKCl7DQoJY29uc29sZS5sb2coJ2hlbGxvIHJvb3QnKTsNCglhbGVydCgnaGVsbG8gd29ybGQnKTsNCn0pKCk7"
+    }],
+    "css": [{
+        "src": "Ym9keSB7IG1hcmdpbjogMHB4OyBwYWRkaW5nOiAwcHg7IH0NCnAgeyBtYXJnaW46IDMwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgfQ=="
+    }],
+    "files": [{
+        "src": "PCFkb2N0eXBlIGh0bWw+DQo8aHRtbD4NCgk8aGVhZD4NCgkJPHRpdGxlPmFwcCBleGFtcGxlPC90aXRsZT4NCgk8L2hlYWQ+DQoJPGJvZHk+DQoJCTxwPkhlbGxvIFdvcmxkITwvcD4NCgk8L2JvZHk+DQo8L2h0bWw+"
+    }],
+    "inlineImages": []
+}
+
+The spec currently defines 3 JSON arrays of application content: js, css, files. The 'files' field will be used to store HTML fragments and contents of all arrays will be exposed via a Javascript API. CSS includes are injected as a style tag into the context at the bottom of the body. JS files will be loaded in the same way.
+
+Javascript files are loaded in the order defined by the package, which is currently built out via a grunt module. The representative JSON used to build the simple package above and included in the gruntfile is as follows:
+
+packager: {
+	test: { /* grunt task name */
+		/* package metadata */
+		options: {
+			name: 'testpkg',
+			output: 'build/packaged.json',
+			context: "page|sandbox|widget"
+		},
+		
+		/* package contents */
+		files: {
+			js: ['test/somejs.js'],
+			css: ['test/test.css'],
+			files: ['test/index.html']
+		}
+	}
+}
+

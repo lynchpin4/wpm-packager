@@ -5,7 +5,6 @@
     WPM.SDK.Frame = function(el)
     {
         this.isReady = false;
-        this.html = WPM.getApp('sdk').getFile('frame');
         
         if (WPM.isFrame)
         {
@@ -14,7 +13,7 @@
         }
         
         var frame = document.createElement("iframe");
-        frame.src = window.location.toString();
+        frame.src = WPM.Constants.SANDBOX_URL;
         
         if (el)
         {
@@ -24,14 +23,6 @@
         {
             document.body.appendChild(frame);
         }
-        
-        frame.contentWindow.document.head.innerHTML = "";
-        frame.contentWindow.document.body.innerHTML = "";
-        
-        var bootloader_url = document.querySelector('#wpm_bootloader').src;
-        console.log(bootloader_url);
-        
-     //   frame.contentWindow.document.head.innerHTML = '<script type="text/javascript" src="'+bootloader_url+'"></script>';
         
         this.frame = frame;
         this.content = frame.contentWindow;
