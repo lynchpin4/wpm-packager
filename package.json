@@ -1,0 +1,36 @@
+{
+  "name": "grunt-packager",
+  "version": "0.0.0",
+  "description": "grunt plugin for producing wp asset files.",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hashmagic/grunt-packager.git"
+  },
+  "keywords": [
+    "gruntplugin",
+    "web"
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1",
+    "grunt-jsbeautifier": "~0.2.2"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "author": "gray",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/hashmagic/grunt-packager/issues"
+  },
+  "readmeFilename": "README.md"
+}
