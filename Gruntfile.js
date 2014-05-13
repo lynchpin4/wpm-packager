@@ -52,8 +52,9 @@ module.exports = function(grunt) {
 			test: {
 				options: {
 					name: 'testpkg',
-					output: 'build/packaged.json',
-                    context: 'page'
+					output: 'packages/test.json',
+                    context: 'page',
+                    autoload: false
 				},
 				
 				files: {
@@ -61,10 +62,39 @@ module.exports = function(grunt) {
 					css: ['test/test.css'],
 					files: ['test/index.html']
 				}
-			}
+			},
+            
+            wpm: {
+                options: {
+                    name: 'wpm',
+                    output: 'packages/wpm.js',
+                    context: 'page',
+					root: 'testmarket'
+                },
+                
+                files: {
+					js: ['js/jquery.js', 'js/jquery.tmpl.min.js', 'js/jquery-ui-1.9.2.custom.js', 'js/jstorage.min.js', 'js/slimScroll.min.js', 'js/slimScroll.min.js', 'js/bootstrap-transition.js', 'js/bootstrap-alert.js', 'js/bootstrap-modal.js', 'js/bootstrap-tab.js', 'js/bootstrap-tooltip.js', 'js/bootstrap-button.js', 'js/bootstrap-collapse.js', 'js/market.js'],
+					css: ['css/bootstrap.css', 'css/bootstrap-responsive.css', 'css/market.css'],
+					files: ['html/market-fragment.html']
+                }
+            }
 		}
 	};
-	
+	/*
+	<script src="../js/jquery.js"></script>
+	<script src="../js/jquery.tmpl.min.js"></script>
+	<script src="../js/jquery-ui-1.9.2.custom.js"></script>
+	<script src="../js/jstorage.min.js"></script>
+	<script src="../js/slimScroll.min.js"></script>
+	<script src="../js/bootstrap-transition.js"></script>
+	<script src="../js/bootstrap-alert.js"></script>
+	<script src="../js/bootstrap-modal.js"></script>
+	<script src="../js/bootstrap-tab.js"></script>
+	<script src="../js/bootstrap-tooltip.js"></script>
+	<script src="../js/bootstrap-button.js"></script>
+	<script src="../js/bootstrap-collapse.js"></script>
+	<script src="../js/market.js"></script>
+	*/
 	grunt.initConfig(config);
 	
 	grunt.loadTasks('tasks');

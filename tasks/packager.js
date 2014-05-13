@@ -6,9 +6,10 @@
  * Licensed under the BSD-Clause-2
  */
 
-var path = require('path');
+var path = require('path'),
+    fs = require('fs');
 
-var Packager = require('../src/packager');
+var Packager = require('./packagebuilder');
 Packager.greet();
 
 module.exports = function(grunt) {
@@ -20,8 +21,18 @@ module.exports = function(grunt) {
 		var options = this.options({
 			name: 'set-name-in-options',
             context: 'page',
-			output: 'packaged.json'
+			output: 'packaged.json',
+            root: path.resolve(),
+            packagerDebug: false,
+            autoload: true
 		});
+        
+        if (!fs.existsSync(options.root))
+        {
+            grunt.log.writeln('Package contents folder '+options.root+' does not exist. Default is Gruntfile directory.');
+        }
+        
+        grunt.log.writeln('Package Root Directory: '+ options.root);
 		
 		var builder = new Packager.PackageBuilder();
 		builder.package.setName(options.name);
@@ -42,7 +53,9 @@ module.exports = function(grunt) {
 		{
 			cssFiles.forEach(function(cssf){
                 if (cssf == null) return;
-				console.log('adding css file: '+cssf);
+                cssf = path.join(options.root, cssf);
+                
+				if (options.packagerDebug) grunt.log.writeln('adding css file: '+cssf);
 				var file = grunt.file.read(cssf);
 				var name = path.basename(cssf).split('.')[0];
 				
@@ -54,7 +67,9 @@ module.exports = function(grunt) {
 		{
 			jsFiles.forEach(function(jsf){
                 if (jsf == null) return;
-				console.log('adding js file: '+jsf);
+                jsf = path.join(options.root, jsf);
+                
+				if (options.packagerDebug) grunt.log.writeln('adding js file: '+jsf);
 				var file = grunt.file.read(jsf);
                 var name = path.basename(jsf).split('.')[0];
 				builder.addJs(name, file);
@@ -65,8 +80,9 @@ module.exports = function(grunt) {
 		{
 			files.forEach(function(f){
                 if (f == null) return;
+                f = path.join(options.root, f);
                 
-				console.log('adding arbitrary file: '+f);
+				if (options.packagerDebug) grunt.log.writeln('adding arbitrary file: '+f);
 				var file = grunt.file.read(f);
 				var name = path.basename(f).split('.')[0];
 				
@@ -75,6 +91,12 @@ module.exports = function(grunt) {
 		}
 		
 		var result = builder.toString();
+        
+        // jsonp style callback that feeds the app into the package loader
+        if (options.autoload)
+        {
+            result = "WPM.loadApp(" + result + ");";
+        }
 		
 		grunt.log.writeln('Writing '+options.output+'..');
 		grunt.file.write(options.output, result, { encoding: 'UTF-8' });

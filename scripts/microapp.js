@@ -75,8 +75,23 @@ WPM.loadMicroappSupport = function(){
             });
         };
 
-        WPM.loadAppFromScriptTag = function(id){
+        WPM.loadInlineApp = function(id){
             WPM.loadApp($.parseJSON($('#'+id).html()));
+        };
+        
+        WPM.loadAppFromScript = function(url)
+        {
+            var script = document.createElement('script');
+            script.src = url;
+            script.type = 'text/javascript';
+            
+            if (document.head) {
+                document.head.appendChild(script);
+            }
+            else
+            {
+                document.body.appendChild(script);
+            }
         };
         
         /*
@@ -85,6 +100,7 @@ WPM.loadMicroappSupport = function(){
         WPM.MicroApp = function(context, package) {
             this.window = context.window;
             this.package = package;
+            this.name = package.name;
 
             // reference the elements on the page so styles can be removed later
             this.scriptElements = [];

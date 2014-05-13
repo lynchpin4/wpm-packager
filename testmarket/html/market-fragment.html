@@ -1,0 +1,119 @@
+<div id="marketModal" class="modal hide fade" tabindex="-1" role="dialog">
+
+    <div class="modal-body">
+        <div id="axcidMarketWidget" class="axcidWidget">
+            <div class="">
+                <div id="axcidMarketTitle">Axcid Script Market</div>
+                <ul class="nav nav-tabs" id="marketTabs">
+                    <li class="active"><a href="#axcidMarketTab" data-toggle="tab">App Market</a></li>
+                    <li><a href="#axcidMarketTweaksTab" data-toggle="tab">Site Tweaks</a></li>
+                    <li><a href="#axcidMarketOptionsTab" data-toggle="tab">Options</a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="axcidMarketTab">
+                    <div class="accordion" id="accordion2">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                    Top apps for domain.com
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="accordion-body collapse in">
+                                <div class="accordion-inner">
+                                    <div class="app-results">
+                                        <div class="row-fluid">
+                                            <table class="table table-striped">
+                                                <tbody id="appResultsBody">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                                    Top apps (Script Market)
+                                </a>
+                            </div>
+                            <div id="collapseTwo" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <div class="app-results">
+                                        <div class="row-fluid">
+                                            <table class="table table-striped" style="border-top: 1px solid #DDD;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><img class="app-result-icon" src="../images/gmail-icon.png" /></td>
+                                                        <td><div class="app-result-snippet">Even better app</div></td>
+                                                        <td>
+                                                            <div class="app-result-actions">
+                                                                <div class="btn-group" data-toggle="buttons-radio">
+                                                                    <button type="button" class="btn btn-primary active">On</button>
+                                                                    <button type="button" class="btn btn-primary">Off</button>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="axcidMarketTweaksTab">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div class="tab-pane" id="axcidMarketOptionsTab">
+                    <a href="#loginModal" role="button" class="btn" data-toggle="modal">Login</a>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="loginModal" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Login</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <input type="text" />
+            <input type="password" />
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
+    </div>
+</div>
+
+
+<script id="appResultTemplate" type="text/x-jquery-tmpl">
+    <tr>
+        <td><img class="app-result-icon" src="${icon}" /></td>
+        <td><div class="app-result-snippet">${title}</div></td>
+        <td>
+            <div class="app-result-actions">
+                {{if installed}}
+                <div class="btn-group" data-toggle="buttons-radio">
+                    <button type="button" class="btn btn-primary active">On</button>
+                    <button type="button" class="btn btn-primary">Off</button>
+                </div>
+                {{else}}
+                <div class="app-result-actions"><button type="button" class="btn btn-primary" data-loading-text="Installing..." onclick="AxcidScript.installButtonClicked(12343, this);">Install</button></div>
+                {{/if}}
+            </div>
+        </td>
+    </tr>
+</script>

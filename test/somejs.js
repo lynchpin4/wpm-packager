@@ -1,4 +1,3 @@
 (function(){
-	console.log('hello root');
-	alert('hello world');
+	console.log('hello root (test app did load)');
 })();

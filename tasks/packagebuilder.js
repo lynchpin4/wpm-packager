@@ -1,3 +1,7 @@
+/**
+ * As this file defines the package format, ideally it should be kept seperate from the task implementing it.
+ */
+
 var Packager = {};
 var grrunt = null;
 
