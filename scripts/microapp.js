@@ -36,6 +36,30 @@ WPM.loadApp = function(microapp)
     }
 };
 
+// Return the running instance of a microapp
+WPM.getApp = function(name)
+{
+    for (var i=0;i<WPM.microApps.length;i++)
+    {
+        if (WPM.microApps[i].name == name) return WPM.microApps[i];
+    }
+    
+    return null;
+};
+
+// Not sure if there is a need for this yet, multiple microapp instances?
+WPM.getApps = function(name)
+{
+    var returns = [];
+    
+    for (var i=0;i<WPM.microApps.length;i++)
+    {
+        if (WPM.microApps[i].name == name) returns.push(WPM.microApps[i]);
+    }
+    
+    return returns;
+};
+
 // called when underscore and jq are loaded asynchronously
 WPM.loadMicroappSupport = function(){
     (function(WPM){
