@@ -29,7 +29,7 @@ module.exports = function(grunt) {
 		  },
 		  dist: {
 			// the files to concatenate
-			src: ['scripts/package_loader.js', 'scripts/microapp.js', 'scripts/bootstrap.js'],
+			src: ['scripts/package_loader.js', 'scripts/microapp.js', 'scripts/bootstrap.js', 'packages/sdk.js'],
 			// the location of the resulting JS file
 			dest: 'build/boot.js'
 		  }
@@ -54,7 +54,8 @@ module.exports = function(grunt) {
 					name: 'testpkg',
 					output: 'packages/test.json',
                     context: 'page',
-                    autoload: false
+                    autoload: false,
+                    root: 'apps'
 				},
 				
 				files: {
@@ -64,12 +65,42 @@ module.exports = function(grunt) {
 				}
 			},
             
+            sdk: {
+                options: {
+                    name: 'sdk',
+                    output: 'packages/sdk.js',
+                    context: 'page',
+					root: 'apps/app_sdk'
+                },
+                
+                files: {
+                    js: ['sdk.js'],
+                    css: ['sdk.css'],
+                    files: ['frame.html']
+                }
+            },
+            
+            market_frame: {
+                options: {
+                    name: 'market_frame',
+                    output: 'packages/market.js',
+                    context: 'page',
+					root: 'apps/market_frame'
+                },
+                
+                files: {
+                    js: ['loader.js'],
+                    css: ['overlay.css'],
+                    files: ['divs.html']
+                }
+            },
+            
             wpm: {
                 options: {
                     name: 'wpm',
                     output: 'packages/wpm.js',
                     context: 'page',
-					root: 'testmarket'
+					root: 'apps/testmarket'
                 },
                 
                 files: {
@@ -80,21 +111,7 @@ module.exports = function(grunt) {
             }
 		}
 	};
-	/*
-	<script src="../js/jquery.js"></script>
-	<script src="../js/jquery.tmpl.min.js"></script>
-	<script src="../js/jquery-ui-1.9.2.custom.js"></script>
-	<script src="../js/jstorage.min.js"></script>
-	<script src="../js/slimScroll.min.js"></script>
-	<script src="../js/bootstrap-transition.js"></script>
-	<script src="../js/bootstrap-alert.js"></script>
-	<script src="../js/bootstrap-modal.js"></script>
-	<script src="../js/bootstrap-tab.js"></script>
-	<script src="../js/bootstrap-tooltip.js"></script>
-	<script src="../js/bootstrap-button.js"></script>
-	<script src="../js/bootstrap-collapse.js"></script>
-	<script src="../js/market.js"></script>
-	*/
+    
 	grunt.initConfig(config);
 	
 	grunt.loadTasks('tasks');

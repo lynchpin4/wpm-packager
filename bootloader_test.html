@@ -2,18 +2,20 @@
 <html>
     <head>
         <title>Package Bootloader Tests</title>
-        <script type="text/javascript" src="build/boot.js"></script>
+        <script id="wpm_bootloader" type="text/javascript" src="build/boot.js"></script>
     </head>
     <body>
         <script id="test" type="text/packaged-app">{"name":"testpkg","context":"page","js":[{"name":"somejs","src":"KGZ1bmN0aW9uKCl7DQoJY29uc29sZS5sb2coJ2hlbGxvIHJvb3QgKHRlc3QgYXBwIGRpZCBsb2FkKScpOw0KfSkoKTs="}],"css":[{"name":"test","src":"Ym9keSB7IG1hcmdpbjogMHB4OyBwYWRkaW5nOiAwcHg7IH0NCnAgeyBtYXJnaW46IDMwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgfQ=="}],"files":[{"name":"index","src":"PCFkb2N0eXBlIGh0bWw+DQo8aHRtbD4NCgk8aGVhZD4NCgkJPHRpdGxlPmFwcCBleGFtcGxlPC90aXRsZT4NCgk8L2hlYWQ+DQoJPGJvZHk+DQoJCTxwPkhlbGxvIFdvcmxkITwvcD4NCgk8L2JvZHk+DQo8L2h0bWw+"}],"inlineImages":[]}</script>
+		
         <script type="text/javascript">
         
             function wpm_load_callback()
             {
                 WPM.loadInlineApp("test");
-                WPM.loadAppFromScript("packages/wpm.js");
+                WPM.loadAppFromScript("packages/market.js");
             }
             
         </script>
+        <!--  <script type="text/javascript" src="packages/wpm.js"></script> -->
     </body>
 </html>

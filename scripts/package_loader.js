@@ -1,5 +1,5 @@
 /*
- * Package Loader
+ * Package Loader (Misleading as Microapps handles loading of packages)
  * http://packager.webpushers.com/
  *
  * Copyright (c) 2014 - gray @ gangster dot io
@@ -20,6 +20,8 @@ window.WPM.Log = {
 	log: function(o) { if (WPM.debug) console.log(o); },
 	i: function(o) { if (WPM.debug) console.info(o); }
 };
+
+window.WPM.isFrame = (parent != window);
 
 /* closure */
 (function(window){

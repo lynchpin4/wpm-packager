@@ -62,10 +62,10 @@ WPM.getApps = function(name)
 
 // called when underscore and jq are loaded asynchronously
 WPM.loadMicroappSupport = function(){
+    var _ = WPM._;
+    var $ = WPM.$;
+    
     (function(WPM){
-
-        var _ = WPM._;
-        var $ = WPM.$;
         
         // Most likely used for non cross domain packaged apps.
         WPM.loadAppFromURL = function(url)
@@ -124,6 +124,10 @@ WPM.loadMicroappSupport = function(){
         WPM.MicroApp.prototype.launch = function()
         {
             var self = this;
+            
+            _.forEach(this.package.files, function(fo) {
+                self.files[fo.name] = atob(fo.src);
+            });
 
             _.forEach(this.package.js, function(jso) {
                 var el = document.createElement('script');
@@ -143,10 +147,6 @@ WPM.loadMicroappSupport = function(){
                 document.body.appendChild(el);
                 
                 self.cssElements.push(el);
-            });
-
-            _.forEach(this.package.files, function(fo) {
-                self.files[fo.name] = atob(fo.src);
             });
         };
 

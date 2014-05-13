@@ -1,29 +1,16 @@
-var express = require("express"),
-    app     = express(),
-    port    = parseInt(process.env.PORT, 10) || 37120;
-    
-app.get("/", function(req, res) {
-  res.redirect("/index.html");
+var express = require('express');
+var app = express();
+var fs = require('fs');
+
+app.get('/', function(req, res){
+  res.status(200);
+  res.set('Content-Type', 'text/html');
+  var html = fs.readFileSync(__dirname + '/../bootloader_test.html')+'';
+  res.send(html);
 });
 
-app.configure(function(){
-  app.use(express.methodOverride());
-  app.use(express.bodyParser());
-  app.use(express.static(__dirname + '../build'));
-  app.use(express.static(__dirname + '../scripts'));
-  app.use(express.errorHandler({
-    dumpExceptions: true, 
-    showStack: true
-  }));
-});
+app.use('/packages', express.static(__dirname + '/../packages'));
+app.use('/build', express.static(__dirname + '/../build'));
 
-var router = express.Router();
-
-router.get('/test', function(req, res, next) {
-	res.send('asdsadgadfhadfh');
-	next();
-});
-
-app.use('/', router);
-
-app.listen(port);
+app.listen(3000);
+console.log("navigate to localhost:3000 to test");
