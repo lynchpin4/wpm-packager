@@ -3,6 +3,49 @@
     <head>
         <title>App Canvas</title>
         <script id="wpm_bootloader" type="text/javascript" src="http://localhost:3000/build/boot.js"></script>
+        <script type="text/javascript">
+            var request = 0;
+            
+            function onMessage (event) {
+                var msg = JSON.parse(event.data);
+                console.dir(msg);
+                
+                if (msg.type == "fr")
+                {
+                    if (msg.cmd == "eval")
+                    {
+                        console.log('eval: '+msg.code);
+                        send({
+                            request: msg,
+                            response: eval(msg.code)
+                        });
+                    }
+                }
+            }
+            
+            function send(data) {
+                data.type = 'fr';
+                data.id = request++;
+                window.parent.postMessage(JSON.stringify(data), '*');
+            };
+
+            if (window.attachEvent)
+            {
+                window.attachEvent('onmessage', onMessage);
+            }
+            else if (window.addEventListener)
+            {
+                window.addEventListener('message', onMessage, false);
+            }
+            
+            function wpm_load_callback()
+            {
+                console.log('wpm loaded in frame');
+                send({
+                    cmd: "wpm_ready"
+                });
+            }
+        </script>
     </head>
     <body>
     </body>

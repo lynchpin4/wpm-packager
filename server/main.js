@@ -20,6 +20,7 @@ var app2 = express();
 app2.get('/', function(req, res){
   res.status(200);
   res.set('Content-Type', 'text/html');
+  res.set('Access-Control-Allow-Origin', '*');
   var html = fs.readFileSync(__dirname + '/../iframe_sandbox.html')+'';
   res.send(html);
 });

@@ -13,4 +13,11 @@
     
     var frame = new WPM.SDK.Frame('#wpm_appstore_container');
     
+    frame.onReady = function() {
+        console.log('loading the market in the frame..');
+        frame.send({
+            cmd: "eval",
+            code: "WPM.loadAppFromScript('http://localhost:3000/packages/wpm.js');"
+        });
+    }
 })();
