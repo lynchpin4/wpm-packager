@@ -163,5 +163,6 @@ WPM.loadMicroappSupport = function(){
     if (WPM.loadAppQueue.length != 0)
         _.forEach(WPM.loadAppQueue, WPM.loadApp);
     
-    WPM.bootstrapObject.onFinished();
+    // review / fix
+    if (WPM.bootstrapObject != null && WPM.bootstrapObject.onFinished) WPM.bootstrapObject.onFinished();
 };
