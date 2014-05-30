@@ -17,7 +17,7 @@
         console.log('loading the market in the frame..');
         frame.send({
             cmd: "eval",
-            code: "WPM.loadAppFromScript('http://market.webpushers.com/packages/wpm.js');"
+            code: "WPM.loadAppFromScript('//market.webpushers.com/packages/wpm.js');"
         });
     }
 })();
