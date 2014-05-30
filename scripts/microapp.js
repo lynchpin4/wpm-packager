@@ -101,6 +101,7 @@ WPM.loadMicroappSupport = function(){
             this.window = context.window;
             this.package = package;
             this.name = package.name;
+            this.currentResource = 1;
 
             // reference the elements on the page so styles can be removed later
             this.scriptElements = [];
@@ -112,7 +113,8 @@ WPM.loadMicroappSupport = function(){
         // get an id for a script element or style tag
         WPM.MicroApp.prototype.getId = function(type)
         {
-            return _.uniqueId(this.package.name + "_" + type);
+            this.currentResource++;
+            return this.package.name + "_" + type + "_"+this.currentResource;
         };
 
         WPM.MicroApp.prototype.getFile = function(index)
@@ -130,7 +132,6 @@ WPM.loadMicroappSupport = function(){
                 var fo = this.package.files[i];
                 self.files[fo.name] = atob(fo.src);
             }
-            
             
             for (var i=0;i<this.package.js.length;i++)
             {
