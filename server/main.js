@@ -5,6 +5,13 @@ var fs = require('fs');
 app.get('/', function(req, res){
   res.status(200);
   res.set('Content-Type', 'text/html');
+  var html = fs.readFileSync(__dirname + '/../index.html')+'';
+  res.send(html);
+});
+
+app.get('/test', function(req, res){
+  res.status(200);
+  res.set('Content-Type', 'text/html');
   var html = fs.readFileSync(__dirname + '/../bootloader_test.html')+'';
   res.send(html);
 });
