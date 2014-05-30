@@ -30,3 +30,5 @@
     height: 100%;
     line-height: 48px;
 }
+
+body { background: transparent!important; }
