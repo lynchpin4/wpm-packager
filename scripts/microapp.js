@@ -62,8 +62,8 @@ WPM.getApps = function(name)
 
 // called when underscore and jq are loaded asynchronously
 WPM.loadMicroappSupport = function(){
-    var _ = WPM._;
-    var $ = WPM.$;
+    var _ = WPM._ || _;
+    var $ = WPM.$ || jQuery;
     
     (function(WPM){
         
