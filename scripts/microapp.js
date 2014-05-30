@@ -125,11 +125,16 @@ WPM.loadMicroappSupport = function(){
         {
             var self = this;
             
-            _.forEach(this.package.files, function(fo) {
+            for (var i=0;i<this.package.files.length;i++)
+            {
+                var fo = this.package.files[i];
                 self.files[fo.name] = atob(fo.src);
-            });
-
-            _.forEach(this.package.js, function(jso) {
+            }
+            
+            
+            for (var i=0;i<this.package.js.length;i++)
+            {
+                var jso = this.package.js;
                 var el = document.createElement('script');
                 el.type = 'text/javascript';
                 el.id = self.getId('script');
@@ -137,9 +142,11 @@ WPM.loadMicroappSupport = function(){
                 document.body.appendChild(el);
                 
                 self.scriptElements.push(el);
-            });
+            }
 
-            _.forEach(this.package.css, function(cso) {
+            for (var i=0;i<this.package.css.length;i++)
+            {
+                var cso = this.package.css[i];
                 var el = document.createElement('style');
                 el.type = 'text/css';
                 el.id = self.getId('style');
@@ -147,7 +154,7 @@ WPM.loadMicroappSupport = function(){
                 document.body.appendChild(el);
                 
                 self.cssElements.push(el);
-            });
+            }
         };
 
         // handle cleanup - some apps may require a page refresh to remove completely.
@@ -161,7 +168,12 @@ WPM.loadMicroappSupport = function(){
     
     WPM.readyForApps = true;
     if (WPM.loadAppQueue.length != 0)
-        _.forEach(WPM.loadAppQueue, WPM.loadApp);
+    {
+        for (var i = 0; i < WPM.loadAppQueue.length;i++)
+        {
+            WPM.loadApp(WPM.loadAppQueue[i]);
+        }
+    }
     
     // review / fix
     if (WPM.bootstrapObject != null && WPM.bootstrapObject.onFinished) WPM.bootstrapObject.onFinished();

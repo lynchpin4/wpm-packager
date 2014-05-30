@@ -50,7 +50,7 @@
 			var self = this;
 			(function(){
 				var tId = setInterval(function(){
-                    if(window["jQuery"] && window["_"]) 
+                    if(window["jQuery"]) 
                         onComplete();
                 },11);
                 
@@ -63,6 +63,7 @@
                 
                 context.injectScript(jqUrl);
                 
+                /*
                 var underscoreUrl = WPM.Constants.UNDERSCORE_URL;
                 if (window.location.protocol.indexOf('file') != -1)
                 {
@@ -70,13 +71,14 @@
                 }
                 
                 context.injectScript(underscoreUrl);
+                */
                 
                 function onComplete(){
 					clearInterval(tId);
 					jQuery.noConflict();
 					WPM.bootstrapObject.$ = jQuery;
                     WPM.$ = jQuery;
-                    WPM._ = _.noConflict();
+                   // WPM._ = _.noConflict();
 					WPM.bootstrapObject.onJQLoaded();
 				};
 			})();
@@ -122,3 +124,4 @@ WPM.loadComplete = function onComplete(){
 (function(){
     WPM.tId = setInterval(function(){if(WPM.Context && document.readyState == "complete") WPM.loadComplete()},11);
 })();
+
