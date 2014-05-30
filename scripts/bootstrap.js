@@ -21,7 +21,7 @@
 		JQUERY_URL: "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js",
         UNDERSCORE_URL: "//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js", /* replaced underscore w/ lodash */
         BOOTSTRAP_URL: document.querySelector('#wpm_bootloader').src, /* url to the bootstrap of WPM */
-        SANDBOX_URL: "//localhost:3001/"
+        SANDBOX_URL: "//sandbox.webpushers.com/"
 	};
 	
 	if (window.WPM_CONSTANT_OVERRIDES)
