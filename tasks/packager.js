@@ -24,7 +24,8 @@ module.exports = function(grunt) {
 			output: 'packaged.json',
             root: path.resolve(),
             packagerDebug: false,
-            autoload: true
+            autoload: true,
+			b64out: false
 		});
         
         if (!fs.existsSync(options.root))
@@ -97,6 +98,11 @@ module.exports = function(grunt) {
         {
             result = "WPM.loadApp(" + result + ");";
         }
+		
+		if (options.b64out)
+		{
+			result = new Buffer(result).toString("base64");
+		}
 		
 		grunt.log.writeln('Writing '+options.output+'..');
 		grunt.file.write(options.output, result, { encoding: 'UTF-8' });
