@@ -135,7 +135,7 @@ WPM.loadMicroappSupport = function(){
             
             for (var i=0;i<this.package.js.length;i++)
             {
-                var jso = this.package.js;
+                var jso = this.package.js[i];
                 var el = document.createElement('script');
                 el.type = 'text/javascript';
                 el.id = self.getId('script');
